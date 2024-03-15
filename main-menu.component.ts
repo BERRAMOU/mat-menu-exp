@@ -14,6 +14,23 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { MainMenuLink } from "../../../models/menu.model";
 
+export interface Link {
+  name: string;
+  icon: string;
+  link?: string;
+}
+
+export interface SubMenuLink {
+  id: string;
+  links: Array<Link>;
+}
+
+export interface MainMenuLink {
+  tooltip: string;
+  icon: string;
+  subMenu?: SubMenuLink;
+}
+
 @Component({
   selector: "main-menu",
   standalone: true,
