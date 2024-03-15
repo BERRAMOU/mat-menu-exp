@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <ng-container *ngFor="let item of linksList">
+    <button
+      mat-icon-button
+      matTooltip="{{ item.tooltip }}"
+      *ngIf="!item.subMenu; else submenu"
+    >
+      <mat-icon>{{ item.icon }}</mat-icon>
+    </button>
+
+    <ng-template #submenu>
+      <button
+        *ngIf="item.subMenu"
+        mat-icon-button
+        matTooltip="{{ item.tooltip }}"
+        [matMenuTriggerFor]="$any(item.subMenu.id)"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </button>
+      <mat-menu
+        #{{item.subMenu.id}}="matMenu"
+        [overlapTrigger]="false"
+        yPosition="below"
+        xPosition="after"
+      >
+        <button
+          mat-menu-item
+          *ngFor="let subMenuLink of item.subMenu?.links"
+          routerLink="{{ subMenuLink.link }}"
+        >
+          <mat-icon>{{ subMenuLink.icon }}</mat-icon>
+          <span>{{ subMenuLink.name }}</span>
+        </button>
+      </mat-menu>
+    </ng-template>
+  </ng-container>
+</mat-toolbar>
